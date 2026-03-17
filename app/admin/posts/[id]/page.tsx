@@ -1,0 +1,5 @@
+import { prisma } from '@/lib/prisma';
+import { notFound, redirect } from 'next/navigation';
+
+export default async function EditPost({ params }: { params: Promise<{ id: string }> }) { const { id } = await params; const p = await prisma.blogPost.findUnique({ where: { id } }); if(!p) return notFound(); async function update(formData: FormData){'use server'; await prisma.blogPost.update({where:{id}, data:{title:String(formData.get('title')),excerpt:String(formData.get('excerpt')),state: formData.get('state')==='PUBLISHED' ? 'PUBLISHED':'DRAFT'}}); redirect('/admin/posts');}
+return <form action={update} className="grid gap-2 max-w-xl"><input name="title" defaultValue={p.title} className="border p-2 rounded"/><textarea name="excerpt" defaultValue={p.excerpt} className="border p-2 rounded"/><select name="state" defaultValue={p.state} className="border p-2 rounded"><option value="DRAFT">Draft</option><option value="PUBLISHED">Published</option></select><button className="bg-ink text-paper rounded p-2">Save</button></form>; }

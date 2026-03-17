@@ -1,0 +1,5 @@
+import { prisma } from '@/lib/prisma';
+import { notFound, redirect } from 'next/navigation';
+
+export default async function EditProduct({ params }: { params: Promise<{ id: string }> }) { const { id } = await params; const p = await prisma.product.findUnique({ where: { id } }); if(!p) return notFound(); async function update(formData: FormData){'use server'; await prisma.product.update({where:{id}, data:{title:String(formData.get('title')),priceAmd:Number(formData.get('priceAmd')),featured:Boolean(formData.get('featured')),inStock:Boolean(formData.get('inStock'))}}); redirect('/admin/products');}
+return <form action={update} className="grid gap-2 max-w-xl"><input name="title" defaultValue={p.title} className="border p-2 rounded"/><input name="priceAmd" type="number" defaultValue={p.priceAmd} className="border p-2 rounded"/><label><input type="checkbox" name="featured" defaultChecked={p.featured}/> featured</label><label><input type="checkbox" name="inStock" defaultChecked={p.inStock}/> in stock</label><button className="bg-ink text-paper rounded p-2">Save</button></form>; }
