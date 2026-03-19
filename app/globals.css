@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { color-scheme: light; }
+body { @apply bg-paper text-ink font-body; }
+.container-pad { @apply max-w-6xl mx-auto px-4 md:px-6; }
+.h2 { @apply font-heading text-2xl md:text-3xl; }
+.card { @apply rounded-2xl bg-white border border-black/10; }

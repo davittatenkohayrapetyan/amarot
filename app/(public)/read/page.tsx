@@ -1,0 +1,4 @@
+import Link from 'next/link';
+import { prisma } from '@/lib/prisma';
+
+export default async function ReadPage(){const posts=await prisma.blogPost.findMany({where:{state:'PUBLISHED'}, orderBy:{publishDate:'desc'}});return <div className="container-pad py-12"><h1 className="h2 mb-6">Read</h1><div className="grid gap-4">{posts.map((p)=>{const mins=Math.max(2,Math.round(p.body.split(' ').length/220));return <Link key={p.id} href={`/read/${p.slug}`} className="card p-5 block transition-shadow hover:shadow-md border-l-4 border-l-sky"><p className="text-xs text-black/60">{p.categories.join(', ')} · {mins} min read</p><h2 className="font-semibold mt-1">{p.title}</h2><p className="text-sm mt-2 text-black/70">{p.excerpt}</p><p className="text-xs mt-2 text-softRed">Tags: {p.tags.join(', ')}</p></Link>})}</div></div>}
