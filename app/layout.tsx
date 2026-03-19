@@ -1,6 +1,10 @@
 import type { Metadata } from 'next';
+import { Fira_Code, Work_Sans } from 'next/font/google';
 import './globals.css';
 import { siteUrl } from '@/lib/utils';
+
+const firaCode = Fira_Code({ subsets: ['latin'], variable: '--font-heading', display: 'swap' });
+const workSans = Work_Sans({ subsets: ['latin'], variable: '--font-body', display: 'swap' });
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -12,5 +16,5 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  return <html lang="en"><body>{children}</body></html>;
+  return <html lang="en" className={`${firaCode.variable} ${workSans.variable}`}><body>{children}</body></html>;
 }

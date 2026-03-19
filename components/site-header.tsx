@@ -9,7 +9,7 @@ export function SiteHeader() {
       <div className="container-pad py-4 flex items-center justify-between gap-4">
         <Link href="/" className="font-heading text-xl">AMAROT</Link>
         <nav className="hidden md:flex gap-5 text-sm">
-          {links.map((label, i) => <Link key={label} href={paths[i]}>{label}</Link>)}
+          {links.map((label, i) => <Link key={label} href={paths[i]} className="transition-colors hover:text-softRed">{label}</Link>)}
         </nav>
         <div className="flex gap-3"><Search size={18}/><ShoppingBag size={18}/></div>
       </div>

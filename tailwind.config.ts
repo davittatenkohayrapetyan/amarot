@@ -15,8 +15,8 @@ export default {
       },
       borderRadius: { xl: '1rem', '2xl': '1.5rem' },
       fontFamily: {
-        heading: ['"Fira Code"', 'ui-monospace', 'monospace'],
-        body: ['"Work Sans"', 'system-ui', 'sans-serif']
+        heading: ['var(--font-heading)', '"Fira Code"', 'ui-monospace', 'monospace'],
+        body: ['var(--font-body)', '"Work Sans"', 'system-ui', 'sans-serif']
       }
     }
   },

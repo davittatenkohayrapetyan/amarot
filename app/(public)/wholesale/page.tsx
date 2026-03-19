@@ -8,5 +8,5 @@ export default function WholesalePage() {
   <h2 className="font-heading">Account information</h2><input required name="accountName" placeholder="Name" className="border rounded-xl px-3 py-2"/><input required name="accountEmail" placeholder="E-mail" className="border rounded-xl px-3 py-2"/>
   <h2 className="font-heading">Company information</h2><input required name="companyName" placeholder="Company" className="border rounded-xl px-3 py-2"/><input name="taxId" placeholder="Tax ID" className="border rounded-xl px-3 py-2"/>
   <h2 className="font-heading">Shipping address</h2><textarea required name="shippingAddress" className="border rounded-xl px-3 py-2"/>
-  <label><input type="checkbox" required name="agreedToTerms"/> I agree to terms.</label><button className="bg-ink text-paper rounded-xl py-2">Submit</button></form>}</div>;
+  <label><input type="checkbox" required name="agreedToTerms"/> I agree to terms.</label><button className="bg-softRed text-paper rounded-xl py-2 transition-colors hover:bg-fadedRed">Submit</button></form>}</div>;
 }

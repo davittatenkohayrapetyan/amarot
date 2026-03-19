@@ -1,33 +1,46 @@
-generator client { provider = "prisma-client-js" }
+generator client {
+  provider = "prisma-client-js"
+}
 
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
-enum PublishState { DRAFT PUBLISHED }
-enum OrderStatus { PENDING PAID FULFILLED SHIPPED DELIVERED CANCELED }
+enum PublishState {
+  DRAFT
+  PUBLISHED
+}
+
+enum OrderStatus {
+  PENDING
+  PAID
+  FULFILLED
+  SHIPPED
+  DELIVERED
+  CANCELED
+}
 
 model Product {
-  id                String   @id @default(cuid())
-  title             String
-  slug              String   @unique
-  shortDescription  String
-  fullDescription   String
-  priceAmd          Int
-  cartonQuantity    String
-  mainImage         String
-  galleryImages     String[]
-  category          String
-  tags              String[]
-  featured          Boolean  @default(false)
-  inStock           Boolean  @default(true)
-  ingredients       String
+  id                 String   @id @default(cuid())
+  title              String
+  slug               String   @unique
+  shortDescription   String
+  fullDescription    String
+  priceAmd           Int
+  cartonQuantity     String
+  mainImage          String
+  galleryImages      String[]
+  category           String
+  tags               String[]
+  featured           Boolean  @default(false)
+  inStock            Boolean  @default(true)
+  ingredients        String
   nutritionAllergens String
-  care              String
-  sortOrder         Int      @default(0)
-  createdAt         DateTime @default(now())
-  updatedAt         DateTime @updatedAt
+  care               String
+  sortOrder          Int      @default(0)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
 }
 
 model BlogPost {
@@ -48,10 +61,10 @@ model BlogPost {
 }
 
 model Announcement {
-  id        String   @id @default(cuid())
+  id        String  @id @default(cuid())
   message   String
-  sortOrder Int      @default(0)
-  active    Boolean  @default(true)
+  sortOrder Int     @default(0)
+  active    Boolean @default(true)
 }
 
 model HomepageSetting {
@@ -85,9 +98,44 @@ model NewsletterSignup {
   createdAt DateTime @default(now())
 }
 
-model Cart { id String @id @default(cuid()) items CartItem[] }
-model CartItem { id String @id @default(cuid()) cartId String productId String quantity Int cart Cart @relation(fields: [cartId], references:[id]) }
-model CheckoutSession { id String @id @default(cuid()) cartId String status String paymentProvider String? }
-model ShippingMethod { id String @id @default(cuid()) name String priceAmd Int }
-model Address { id String @id @default(cuid()) fullName String line1 String city String postalCode String country String phone String }
-model Order { id String @id @default(cuid()) status OrderStatus @default(PENDING) totalAmd Int }
+model Cart {
+  id    String     @id @default(cuid())
+  items CartItem[]
+}
+
+model CartItem {
+  id        String @id @default(cuid())
+  cartId    String
+  productId String
+  quantity  Int
+  cart      Cart   @relation(fields: [cartId], references: [id])
+}
+
+model CheckoutSession {
+  id              String  @id @default(cuid())
+  cartId          String
+  status          String
+  paymentProvider String?
+}
+
+model ShippingMethod {
+  id       String @id @default(cuid())
+  name     String
+  priceAmd Int
+}
+
+model Address {
+  id         String @id @default(cuid())
+  fullName   String
+  line1      String
+  city       String
+  postalCode String
+  country    String
+  phone      String
+}
+
+model Order {
+  id       String      @id @default(cuid())
+  status   OrderStatus @default(PENDING)
+  totalAmd Int
+}
